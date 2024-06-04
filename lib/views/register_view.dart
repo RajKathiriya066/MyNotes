@@ -54,13 +54,11 @@ class _RegisterViewState extends State<RegisterView> {
             onPressed: () async {
               final email = _email.text;
               final password = _password.text;
-              print(email + password);
               if (email.trim().isNotEmpty && password.trim().isNotEmpty) {
                 try {
                   final userCredential = await FirebaseAuth.instance
                       .createUserWithEmailAndPassword(
                           email: email, password: password);
-                  print(userCredential.toString());
                 } on FirebaseAuthException catch (e) {
                   AlertDialog d;
                   if (e.code == "email-already-in-use") {
@@ -87,8 +85,8 @@ class _RegisterViewState extends State<RegisterView> {
                   showDialog(
                       context: context, builder: (BuildContext context) => d);
                 } catch (e) {
-                  print(e.runtimeType.toString());
-                  print(e.toString());
+                  debugPrint(e.runtimeType.toString());
+                  debugPrint(e.toString());
                 }
               }
             },
