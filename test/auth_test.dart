@@ -39,14 +39,14 @@ void main() {
     });
     test('logged in user should be able to get  verified', () {
       provider.sendEmailVerification();
-      final user =provider.currentUser;
+      final user = provider.currentUser;
       expect(user, isNotNull);
       expect(user!.isEmailVerified, true);
     });
-    test('Should be able to log out and log in again',()async{
+    test('Should be able to log out and log in again', () async {
       await provider.logout();
       await provider.login(email: 'email', password: 'password');
-      final user=provider.currentUser;
+      final user = provider.currentUser;
       expect(user, isNotNull);
     });
   });
@@ -82,7 +82,11 @@ class MockAuthProvider implements AuthProvider {
     if (!isInitialized) throw NotInitializedException();
     if (email == 'foo@bar.com') throw UserNotFoundAuthException();
     if (password == "foobar") throw WrongPassAuthException();
-    const user = AuthUser(isEmailVerified: false,email: "email@email.com");
+    const user = AuthUser(
+      isEmailVerified: false,
+      email: "email@email.com",
+      id: "llcsoidonsinonavjoj42oj90f",
+    );
     _user = user;
     return Future.value(user);
   }
@@ -100,7 +104,11 @@ class MockAuthProvider implements AuthProvider {
     if (!isInitialized) throw NotInitializedException();
     final user = _user;
     if (user == null) throw UserNotFoundAuthException();
-    const newUser = AuthUser(isEmailVerified: true,email: "email@email.com");
+    const newUser = AuthUser(
+      isEmailVerified: true,
+      email: "email@email.com",
+      id: "llcsoidonsinonavjoj42oj90f",
+    );
     _user = newUser;
   }
 }
